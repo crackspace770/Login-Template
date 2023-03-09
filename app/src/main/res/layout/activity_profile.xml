@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.ProfileActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_wrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="357dp"
+                android:background="@color/colorGrey"
+                android:padding="30dp">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@color/colorGrey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgAvatar"
+                    tools:layout_editor_absoluteX="90dp"
+                    tools:layout_editor_absoluteY="3dp"
+                    tools:text="Username" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+                    tools:layout_editor_absoluteX="120dp"
+                    tools:layout_editor_absoluteY="45dp"
+                    tools:text="Email" />
+
+
+                <ImageView
+                    android:id="@+id/icFollowers"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="137dp"
+                    android:contentDescription="@string/user_followers"
+                    app:layout_constraintStart_toEndOf="@+id/tvLocation"
+                    app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+                    app:srcCompat="@drawable/ic_user_followers" />
+
+                <TextView
+                    android:id="@+id/tvFollowers"
+                    android:layout_width="56dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="234dp"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintStart_toEndOf="@+id/icFollowing"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Follower" />
+
+                <ImageView
+                    android:id="@+id/icFollowing"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="236dp"
+                    android:contentDescription="@string/user_following"
+                    app:layout_constraintStart_toEndOf="@+id/tvFollowings"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_user_followers" />
+
+                <TextView
+                    android:id="@+id/tvFollowings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintStart_toEndOf="@+id/icFollowers"
+                    app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                    tools:text="Following" />
+
+                <ImageView
+                    android:id="@+id/icUserLocation"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="236dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/user_location"
+                    app:layout_constraintEnd_toStartOf="@+id/tvLocation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_user_location" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="232dp"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintStart_toEndOf="@+id/icUserLocation"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Location" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
