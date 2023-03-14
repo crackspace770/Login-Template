@@ -20,7 +20,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="357dp"
+                android:layout_height="380dp"
                 android:background="@color/colorGrey"
                 android:padding="30dp">
 
@@ -77,8 +77,8 @@
                     android:id="@+id/icFollowers"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="137dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="128dp"
                     android:contentDescription="@string/user_followers"
                     app:layout_constraintStart_toEndOf="@+id/tvLocation"
                     app:layout_constraintTop_toBottomOf="@+id/tvUsername"
@@ -88,7 +88,7 @@
                     android:id="@+id/tvFollowers"
                     android:layout_width="56dp"
                     android:layout_height="18dp"
-                    android:layout_marginTop="234dp"
+                    android:layout_marginTop="228dp"
                     android:textColor="@color/colorWhite"
                     app:layout_constraintStart_toEndOf="@+id/icFollowing"
                     app:layout_constraintTop_toTopOf="parent"
@@ -99,7 +99,7 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="236dp"
+                    android:layout_marginTop="228dp"
                     android:contentDescription="@string/user_following"
                     app:layout_constraintStart_toEndOf="@+id/tvFollowings"
                     app:layout_constraintTop_toTopOf="parent"
@@ -109,7 +109,7 @@
                     android:id="@+id/tvFollowings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="40dp"
                     android:textColor="@color/colorWhite"
                     app:layout_constraintStart_toEndOf="@+id/icFollowers"
                     app:layout_constraintTop_toBottomOf="@+id/progressBar"
@@ -120,7 +120,7 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="236dp"
+                    android:layout_marginTop="224dp"
                     android:layout_marginEnd="5dp"
                     android:contentDescription="@string/user_location"
                     app:layout_constraintEnd_toStartOf="@+id/tvLocation"
@@ -133,11 +133,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
-                    android:layout_marginTop="232dp"
+                    android:layout_marginTop="224dp"
                     android:textColor="@color/colorWhite"
                     app:layout_constraintStart_toEndOf="@+id/icUserLocation"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Location" />
+
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Logout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFollowings" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

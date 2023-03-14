@@ -1,15 +1,18 @@
 package com.example.logintemplate.ui
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.logintemplate.R
 import com.example.logintemplate.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -40,6 +43,7 @@ class ProfileActivity : AppCompatActivity() {
         userreference?.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
+                binding.tvEmail.text = snapshot.child("email").value.toString()
                 binding.tvUsername.text = snapshot.child("username").value.toString()
               //  binding?.textViewName?.text = snapshot.child("name").value.toString()
             }
@@ -49,6 +53,32 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
+        binding.btnLogout.setOnClickListener {
+            logout()
+        }
+
+        checkandGetpermissions()
+
+    }
+
+    private fun checkandGetpermissions(){
+        if(
+            checkSelfPermission(android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED
+        ){
+            requestPermissions(arrayOf(android.Manifest.permission.CAMERA), 100)
+        }
+        else{
+            Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun logout(){
+        auth.signOut()
+
+        val intent = Intent(this, ProfileActivity::class.java)
+        showLoading(true)
+        startActivity(intent)
+        onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,16 +86,14 @@ class ProfileActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+
+
     //memilih menu di option bar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_logout -> {
-                auth.signOut()
-
-                val intent = Intent(this, ProfileActivity::class.java)
-                showLoading(true)
+            R.id.action_edit -> {
+                val intent = Intent(this, EditActivity::class.java)
                 startActivity(intent)
-                onDestroy()
                 true
             }
 
@@ -74,7 +102,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding?.apply {
+        binding.apply {
             progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
