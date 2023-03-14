@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -15,8 +16,7 @@ import com.example.logintemplate.R
 import com.example.logintemplate.databinding.ActivityEditBinding
 import com.example.logintemplate.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
@@ -36,6 +36,7 @@ class EditActivity:AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("profile")
+        val user = auth.currentUser
 
         binding.profilePicture.setOnClickListener {
             changePicture()
@@ -48,8 +49,31 @@ class EditActivity:AppCompatActivity() {
         binding.emailEdittext.setOnClickListener {
             changeEmail()
         }
-
+        loadProfile()
         checkandGetpermissions()
+    }
+
+    private fun loadProfile(){
+
+        val user = auth.currentUser
+        val userreference = databaseReference?.child(user?.uid!!)
+
+        binding.tvEmail.text = user?.email
+
+        userreference?.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                binding.tvEmail.text = snapshot.child("email").value.toString()
+                binding.tvUsername.text = snapshot.child("username").value.toString()
+                //  binding?.textViewName?.text = snapshot.child("name").value.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
+
     }
 
     private fun checkandGetpermissions(){
@@ -72,10 +96,55 @@ class EditActivity:AppCompatActivity() {
 
     fun changeName(){
 
+        val user = auth.currentUser
+        // creating custom dialog
+        val dialog = Dialog(this@EditActivity)
+
+        // setting content view to dialog
+        dialog.setContentView(R.layout.edit_name_dialogue)
+
+        // getting reference of TextView
+        val dialogButtonYes = dialog.findViewById(R.id.save_button) as Button
+        val dialogButtonNo = dialog.findViewById(R.id.cancel_button) as Button
+
+        // click listener for No
+        dialogButtonNo.setOnClickListener { // dismiss the dialog
+            dialog.dismiss()
+        }
+
+        dialogButtonYes.setOnClickListener newUsername@{
+            var newUsername = binding.usernameEdittext.text.toString()
+
+            if (newUsername.isEmpty()){
+                binding.usernameEdittext.error = "Email Harus Terisi"
+                binding.usernameEdittext.requestFocus()
+                return@newUsername
+            }
+
+            user?.let {
+                user.updateEmail(newUsername).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Toast.makeText(this, "Username Berhasil Diubah", Toast.LENGTH_SHORT).show()
+                        // startActivity(Intent(this, UserFragment::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            dialog.dismiss()
+
+        }
+
+        // show the exit dialog
+        dialog.show()
+
     }
 
     fun changeEmail(){
 
+        val user = auth.currentUser
         // creating custom dialog
         val dialog = Dialog(this@EditActivity)
 
@@ -90,10 +159,38 @@ class EditActivity:AppCompatActivity() {
         dialogButtonNo.setOnClickListener { // dismiss the dialog
             dialog.dismiss()
         }
+
+
         // click listener for Yes
-        dialogButtonYes.setOnClickListener { // dismiss the dialog and exit the exit
+        dialogButtonYes.setOnClickListener newEmail@{ // dismiss the dialog and exit the exit
+            var newEmail = binding.emailEdittext.text.toString()
+
+            if (newEmail.isEmpty()){
+                binding.emailEdittext.error = "Email Harus Terisi"
+                binding.emailEdittext.requestFocus()
+                return@newEmail
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) {
+                binding.emailEdittext.error = "Email Tidak Valid"
+                binding.emailEdittext.requestFocus()
+                return@newEmail
+            }
+
+            user?.let {
+                user.updateEmail(newEmail).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Toast.makeText(this, "Email Berhasil Diubah", Toast.LENGTH_SHORT).show()
+                       // startActivity(Intent(this, UserFragment::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+
             dialog.dismiss()
-            finish()
         }
 
         // show the exit dialog
