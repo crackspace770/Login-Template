@@ -12,7 +12,7 @@
         android:theme="@style/Theme.LoginTemplate"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,18 +22,29 @@
         </activity>
 
         <activity
-            android:name=".ui.DetailActivity"
-            android:label="Detail Activity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".MainActivity"
+            android:label="Main Activity"
+            android:exported="false"
+            />
+
 
         <activity
-            android:name=".ui.LoginActivity"
-            android:label="Login Activity"
-             />
+            android:name=".ui.DetailActivity"
+            android:label="Detail Activity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
 
         <activity
             android:name=".ui.SignupActivity"
             android:label="Sign Up Activity"
+            android:exported="false"
+            />
+
+        <activity
+            android:name=".ui.EditActivity"
+            android:label="Edit Activity"
+            android:exported="false"
             />
 
     </application>

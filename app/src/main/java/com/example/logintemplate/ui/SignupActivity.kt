@@ -47,7 +47,7 @@ class SignupActivity: AppCompatActivity() {
                 binding.nameEditText.setError("Mohon masukkan nama! ")
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(binding.emailEditText.text.toString())) {
-                binding.emailEditText.setError("Please enter user name ")
+                binding.emailEditText.setError("Please enter user email")
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(binding.passwordEditText.text.toString())) {
                 binding.passwordEditText.setError("Please enter password ")
@@ -56,8 +56,11 @@ class SignupActivity: AppCompatActivity() {
 
 
             auth.createUserWithEmailAndPassword(
+
                 binding.emailEditText.text.toString(),
-                binding.passwordEditText.text.toString()
+                binding.passwordEditText.text.toString(),
+
+
             )
                 .addOnCompleteListener {
                     if (it.isSuccessful) {

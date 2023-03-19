@@ -9,13 +9,12 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.logintemplate.R
 import com.example.logintemplate.databinding.ActivityEditBinding
-import com.example.logintemplate.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
@@ -112,17 +111,26 @@ class EditActivity:AppCompatActivity() {
             dialog.dismiss()
         }
 
+        val profileUpdates = userProfileChangeRequest {
+            val userreference = databaseReference?.child(user?.uid!!)
+
+            binding.tvEmail.text = user?.email
+            binding.tvUsername.text = user?.displayName
+
+
+        }
+
         dialogButtonYes.setOnClickListener newUsername@{
             var newUsername = binding.usernameEdittext.text.toString()
 
             if (newUsername.isEmpty()){
-                binding.usernameEdittext.error = "Email Harus Terisi"
+                binding.usernameEdittext.error = "Username Harus Terisi"
                 binding.usernameEdittext.requestFocus()
                 return@newUsername
             }
 
             user?.let {
-                user.updateEmail(newUsername).addOnCompleteListener {
+                user.updateProfile(profileUpdates).addOnCompleteListener {
                     if (it.isSuccessful) {
                         Toast.makeText(this, "Username Berhasil Diubah", Toast.LENGTH_SHORT).show()
                         // startActivity(Intent(this, UserFragment::class.java))
