@@ -36,24 +36,24 @@ class MainActivity : AppCompatActivity() {
 
         rvItem = findViewById(R.id.rv_item)
         rvItem.setHasFixedSize(true)
-        list.addAll(getListHeroes())
+     //   list.addAll(getListHeroes())
 
-        setUpRecyclerView()
+//        setUpRecyclerView()
 
     }
 
-    @SuppressLint("Recycle")
-    private fun getListHeroes(): ArrayList<MainItem> {
-        val dataName = resources.getStringArray(R.array.data_name)
-        val dataDescription = resources.getStringArray(R.array.data_description)
-        val dataPhoto = resources.obtainTypedArray(R.array.data_photo)
-        val listHero = ArrayList<MainItem>()
-        for (i in dataName.indices) {
-            val mainItem = MainItem(dataName[i], dataDescription[i], dataPhoto.getResourceId(i, -1))
-            listHero.add(mainItem)
-        }
-        return listHero
-    }
+ //   @SuppressLint("Recycle")
+ //   private fun getListHeroes(): ArrayList<MainItem> {
+ //       val dataName = resources.getStringArray(R.array.data_name)
+ //       val dataDescription = resources.getStringArray(R.array.data_description)
+ //       val dataPhoto = resources.obtainTypedArray(R.array.data_photo)
+  //      val listHero = ArrayList<MainItem>()
+ //       for (i in dataName.indices) {
+  //          val mainItem = MainItem(dataName[i], dataDescription[i], dataPhoto.getResourceId(i, -1))
+  //          listHero.add(mainItem)
+  //      }
+   //     return listHero
+   // }
 
     private fun setUpRecyclerView(){
 

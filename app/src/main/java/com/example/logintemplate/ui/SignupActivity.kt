@@ -43,9 +43,6 @@ class SignupActivity: AppCompatActivity() {
             if (TextUtils.isEmpty(binding.usernameEditText.text.toString())) {
                 binding.usernameEditText.setError("Mohon masukkan nama pengguna! ")
                 return@setOnClickListener
-            } else if (TextUtils.isEmpty(binding.nameEditText.text.toString())) {
-                binding.nameEditText.setError("Mohon masukkan nama! ")
-                return@setOnClickListener
             } else if (TextUtils.isEmpty(binding.emailEditText.text.toString())) {
                 binding.emailEditText.setError("Please enter user email")
                 return@setOnClickListener
@@ -66,9 +63,8 @@ class SignupActivity: AppCompatActivity() {
                     if (it.isSuccessful) {
                         val currentUser = auth.currentUser
                         val currentUSerDb = databaseReference?.child((currentUser?.uid!!))
-                        currentUSerDb?.child("username")
-                            ?.setValue(binding.usernameEditText.text.toString())
-                        currentUSerDb?.child("name")?.setValue(binding.nameEditText.text.toString())
+                        currentUSerDb?.child("username")?.setValue(binding.usernameEditText.text.toString())
+
 
                         Toast.makeText(
                             this@SignupActivity,
@@ -118,8 +114,6 @@ class SignupActivity: AppCompatActivity() {
  //       }.start()
 
         val title = ObjectAnimator.ofFloat(binding.tvRegister, View.ALPHA, 1f).setDuration(500)
-        val nameTextView =
-            ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(500)
         val emailTextView =
             ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(500)
         val usernameTextView =
@@ -131,7 +125,6 @@ class SignupActivity: AppCompatActivity() {
         AnimatorSet().apply {
             playSequentially(
                 title,
-                nameTextView,
                 usernameTextView,
                 emailTextView,
                 passwordTextView,

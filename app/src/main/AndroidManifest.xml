@@ -42,6 +42,12 @@
             />
 
         <activity
+            android:name=".ui.ProfileActivity"
+            android:label="Profile Activity"
+            android:exported="false"
+            />
+
+        <activity
             android:name=".ui.EditActivity"
             android:label="Edit Activity"
             android:exported="false"
