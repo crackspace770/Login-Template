@@ -10,20 +10,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.logintemplate.R
 import com.example.logintemplate.databinding.ActivityProfileBinding
+import com.example.logintemplate.databinding.ActivityUserBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 
 class ProfileActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityProfileBinding
+    private lateinit var binding: ActivityUserBinding
     private lateinit var auth: FirebaseAuth
     private var databaseReference :  DatabaseReference? = null
     private var database: FirebaseDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
+        binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
@@ -39,6 +40,7 @@ class ProfileActivity : AppCompatActivity() {
         val userreference = databaseReference?.child(user?.uid!!)
 
         binding.tvEmail.text = user?.email
+        binding.tvUsername.text = user?.displayName
 
         userreference?.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -75,8 +77,9 @@ class ProfileActivity : AppCompatActivity() {
     private fun logout(){
         auth.signOut()
 
-        val intent = Intent(this, ProfileActivity::class.java)
-        showLoading(true)
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+       // showLoading(true)
         startActivity(intent)
         onDestroy()
     }
@@ -101,9 +104,9 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.apply {
-            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }
-    }
+ //   private fun showLoading(isLoading: Boolean) {
+ //       binding.apply {
+ //           progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+ //       }
+//    }
 }

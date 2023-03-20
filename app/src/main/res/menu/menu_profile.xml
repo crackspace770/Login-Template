@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/action_edit"
-        android:icon="@drawable/baseline_settings_power_24"
+        android:icon="@drawable/baseline_settings_24"
         android:title="action_edit"
         app:showAsAction="ifRoom" />
 
