@@ -87,6 +87,7 @@
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="3dp"
+                android:scrollbars="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_fruit"
@@ -96,10 +97,12 @@
                 android:id="@+id/tvUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="Halo Lorem"
                 android:textSize="24sp"
-                tools:layout_editor_absoluteX="27dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:layout_constraintBottom_toTopOf="@+id/img_fruit"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

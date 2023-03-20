@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class MainItem(
-    val nama: String ,
+    val nama: String,
     val deskripsi: String,
     val gambar: Int,
     ): Parcelable

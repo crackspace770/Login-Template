@@ -36,39 +36,36 @@ class MainActivity : AppCompatActivity() {
 
         rvItem = findViewById(R.id.rv_item)
         rvItem.setHasFixedSize(true)
-     //   list.addAll(getListHeroes())
-
+        list.addAll(getListHeroes())
+        showRecyclerList()
 //        setUpRecyclerView()
 
     }
 
- //   @SuppressLint("Recycle")
- //   private fun getListHeroes(): ArrayList<MainItem> {
- //       val dataName = resources.getStringArray(R.array.data_name)
- //       val dataDescription = resources.getStringArray(R.array.data_description)
- //       val dataPhoto = resources.obtainTypedArray(R.array.data_photo)
-  //      val listHero = ArrayList<MainItem>()
- //       for (i in dataName.indices) {
-  //          val mainItem = MainItem(dataName[i], dataDescription[i], dataPhoto.getResourceId(i, -1))
-  //          listHero.add(mainItem)
-  //      }
-   //     return listHero
-   // }
-
-    private fun setUpRecyclerView(){
-
-        rvItem = findViewById(R.id.rv_item)
-        rvItem.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL, false)
-            adapter = mainAdapter
+    @SuppressLint("Recycle")
+    private fun getListHeroes(): ArrayList<MainItem> {
+        val dataName = resources.getStringArray(R.array.data_name)
+        val dataDescription = resources.getStringArray(R.array.data_description)
+        val dataPhoto = resources.obtainTypedArray(R.array.data_photo)
+        val listHero = ArrayList<MainItem>()
+        for (i in dataName.indices) {
+            val hero = MainItem(dataName[i], dataDescription[i], dataPhoto.getResourceId(i, -1))
+            listHero.add(hero)
         }
+        return listHero
+    }
 
-        mainAdapter.setOnItemClickCallback(object : ItemClickCallBack {
-            override fun onItemClicked(mainItem: MainItem) {
-                showSelectedItem(mainItem)
+    private fun showRecyclerList() {
+        rvItem.layoutManager = LinearLayoutManager(this, )
+        val listHeroAdapter = MainAdapter(list)
+        rvItem.adapter = listHeroAdapter
+        listHeroAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: MainItem) {
+                showSelectedItem(data)
             }
         })
     }
+
 
     //bila meng-click user
     private fun showSelectedItem(user: MainItem) {

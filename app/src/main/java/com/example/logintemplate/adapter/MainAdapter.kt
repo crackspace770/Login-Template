@@ -1,62 +1,64 @@
 package com.example.logintemplate.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.logintemplate.R
 import com.example.logintemplate.databinding.ItemMainBinding
 import com.example.logintemplate.model.MainItem
+import java.util.ArrayList
 
-class MainAdapter(private val listItem: ArrayList<MainItem>): RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter(private val listItem: ArrayList<MainItem>) : RecyclerView.Adapter<MainAdapter.ListViewHolder>() {
 
-    private lateinit var onItemClickCallback: ItemClickCallBack
-    private val mainItem = ArrayList<MainItem>()
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
-    fun setOnItemClickCallback(onItemClickCallback: ItemClickCallBack) {
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    fun setData(items: ArrayList<MainItem>){
-        val diffUtil = MyDiffUtil(mainItem, items)
-        val diffResult = DiffUtil.calculateDiff(diffUtil)
-        mainItem.clear()
-        mainItem.addAll(items)
-        diffResult.dispatchUpdatesTo(this)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+        val binding =
+            ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listItem.size
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        holder.bind(listItem[position])
+    }
 
-    inner class ViewHolder(private var binding: ItemMainBinding) :
+    inner class ListViewHolder(private val binding: ItemMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(mainItem: MainItem) {
+        fun bind(data: MainItem) {
             binding.apply {
-                Glide.with(itemView.context)
-                    .load(mainItem.gambar)
-                    .centerCrop()
-                    .into(imgItemPhoto)
-                tvTitle.text = mainItem.nama
-                tvDescription.text = mainItem.deskripsi
+                binding.apply {
+                    Glide.with(itemView.context)
+                        .load({data.gambar})
+                        .centerCrop()
+                        .into(imgItemPhoto)
+                    tvTitle.setText(data.nama)
+                    tvDescription.setText(data.deskripsi)
 
-                itemView.setOnClickListener {
-                    onItemClickCallback.onItemClicked(mainItem)
+                    itemView.setOnClickListener {
+                        onItemClickCallback.onItemClicked(data)
+                    }
                 }
+
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+    override fun getItemCount(): Int = listItem.size
+
+
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: MainItem)
     }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mainItem[position])
-        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listItem[holder.adapterPosition]) }
-    }
-
-
 
 }
