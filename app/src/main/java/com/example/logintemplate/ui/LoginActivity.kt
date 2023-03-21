@@ -43,10 +43,10 @@ class LoginActivity: AppCompatActivity() {
         binding.buttonLogin.setOnClickListener {
 
             if (TextUtils.isEmpty(binding.emailEditText.text.toString())) {
-                binding.emailEditText.setError("Masukkan email yang benar")
+                binding.emailEditText.error = "Masukkan email yang benar"
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(binding.passwordEditText.text.toString())) {
-                binding.passwordEditText.setError("Masukkan password yang benar")
+                binding.passwordEditText.error = "Masukkan password yang benar"
                 return@setOnClickListener
             }
             auth.signInWithEmailAndPassword(

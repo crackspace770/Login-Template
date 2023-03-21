@@ -41,13 +41,13 @@ class SignupActivity: AppCompatActivity() {
 
         binding.signupButton.setOnClickListener {
             if (TextUtils.isEmpty(binding.usernameEditText.text.toString())) {
-                binding.usernameEditText.setError("Mohon masukkan nama pengguna! ")
+                binding.usernameEditText.error = "Mohon masukkan nama pengguna! "
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(binding.emailEditText.text.toString())) {
-                binding.emailEditText.setError("Please enter user email")
+                binding.emailEditText.error = "Please enter user email"
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(binding.passwordEditText.text.toString())) {
-                binding.passwordEditText.setError("Please enter password ")
+                binding.passwordEditText.error = "Please enter password "
                 return@setOnClickListener
             }
 
@@ -83,7 +83,7 @@ class SignupActivity: AppCompatActivity() {
                 }
         }
 
-        binding.backToLogin.setOnClickListener {
+        binding.tvPunyaAkun.setOnClickListener {
             startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
         }
     }

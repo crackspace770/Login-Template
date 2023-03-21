@@ -5,11 +5,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.logintemplate.R
-import com.example.logintemplate.databinding.ActivityProfileBinding
 import com.example.logintemplate.databinding.ActivityUserBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -21,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var databaseReference :  DatabaseReference? = null
     private var database: FirebaseDatabase? = null
+    private lateinit var uid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +28,14 @@ class ProfileActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+        uid = auth.currentUser?.uid.toString()
         databaseReference = database?.reference!!.child("profile")
 
-        loadProfile()
+        if (uid.isNotEmpty()){
+
+            loadProfile()
+        }
+
     }
 
     private fun loadProfile(){

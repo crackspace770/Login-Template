@@ -58,6 +58,7 @@ class EditActivity:AppCompatActivity() {
         val userreference = databaseReference?.child(user?.uid!!)
 
         binding.tvEmail.text = user?.email
+        binding.tvUsername.text = user?.displayName
 
         userreference?.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

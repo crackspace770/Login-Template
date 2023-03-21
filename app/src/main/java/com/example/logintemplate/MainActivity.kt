@@ -13,10 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.logintemplate.adapter.ItemClickCallBack
 import com.example.logintemplate.adapter.MainAdapter
 import com.example.logintemplate.databinding.ActivityHomeBinding
-import com.example.logintemplate.databinding.ActivityMainBinding
-import com.example.logintemplate.databinding.ActivitySignupBinding
 import com.example.logintemplate.model.MainItem
 import com.example.logintemplate.ui.DetailActivity
+import com.example.logintemplate.ui.EditActivity
 import com.example.logintemplate.ui.ProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("Recycle")
+
     private fun getListHeroes(): ArrayList<MainItem> {
         val dataName = resources.getStringArray(R.array.data_name)
         val dataDescription = resources.getStringArray(R.array.data_description)
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun showRecyclerList() {
         rvItem.layoutManager = LinearLayoutManager(this, )
         val listHeroAdapter = MainAdapter(list)
-        rvItem.adapter = listHeroAdapter
+       rvItem.adapter = listHeroAdapter
         listHeroAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
             override fun onItemClicked(data: MainItem) {
                 showSelectedItem(data)
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_profile -> {
-                val intent = Intent(this, ProfileActivity::class.java)
+                val intent = Intent(this, EditActivity::class.java)
                 startActivity(intent)
                 true
             }

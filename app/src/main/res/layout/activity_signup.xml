@@ -8,12 +8,13 @@
     android:background="@color/teal_700"
     tools:context=".ui.SignupActivity">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/CardView"
-        android:layout_width="380dp"
-        android:layout_height="650dp"
+        style="@style/custom_card_view_style"
+        android:layout_width="400dp"
+        android:layout_height="600dp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
@@ -34,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="88dp"
+                android:layout_marginTop="45dp"
                 android:text="@string/username"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +101,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
-            <EditText
+            <com.example.logintemplate.customView.PasswordView
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -122,11 +123,11 @@
 
             <Button
                 android:id="@+id/signupButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="337dp"
+                android:layout_height="58dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_corners"
                 android:text="Register"
+                app:cornerRadius="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
@@ -136,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
                 android:text="Registrasi"
                 android:textSize="32sp"
@@ -145,15 +146,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/backToLogin"
-                android:layout_width="314dp"
-                android:layout_height="49dp"
-                android:layout_marginStart="32dp"
+            <TextView
+                android:id="@+id/tvPunyaAkun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/rounded_corners"
-                android:text="Balik Login"
+                android:layout_marginEnd="24dp"
+                android:text="Sudah Punya Akun? Login yuk!"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/signupButton" />
@@ -161,7 +161,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
